@@ -4,7 +4,7 @@ services:
   stonksms:
     build: .
     ports:
-      - 8081:8080
+      - 8081:8081
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/stonks
       DB_USERNAME: admin
@@ -13,16 +13,25 @@ services:
   grafana:
     image: grafana/grafana
     restart: 'always'
+    volumes:
+      - ./volumes/grafana/lib:/var/lib/grafana
     ports:
       - 3000:3000
+    depends_on:
+      - prometheus
 
   prometheus:
     image: prom/prometheus
     restart: always
     volumes:
+      - ./volumes/prometheus/lib:/var/lib/prometheus
       - ./volumes/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 9090:9090
+    depends_on:
+      - stonksms
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
