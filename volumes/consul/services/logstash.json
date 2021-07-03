@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "logstash",
+    "tags": [
+      "kibana"
+    ],
+    "port": 5044
+  }
+}

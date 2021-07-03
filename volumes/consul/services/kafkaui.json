@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "kafka-ui",
+    "tags": [
+      "kafka"
+    ],
+    "port": 8080
+  }
+}
