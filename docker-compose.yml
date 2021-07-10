@@ -53,6 +53,8 @@ services:
       - 9090:9090
     depends_on:
       - educationms
+      - marketplacems
+      - membershipms
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
