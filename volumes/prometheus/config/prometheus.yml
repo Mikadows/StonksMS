@@ -6,10 +6,26 @@ global:
 
 
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: 'education'
     scrape_interval: 5s
     scrape_timeout: 3s
     metrics_path: /actuator/prometheus
     scheme: http
     static_configs:
-      - targets: ['stonksms:8081']
+      - targets: ['educationms:8081']
+
+  - job_name: 'marketplace'
+    scrape_interval: 5s
+    scrape_timeout: 3s
+    metrics_path: /actuator/prometheus
+    scheme: http
+    static_configs:
+      - targets: ['marketplacems:8082']
+
+  - job_name: 'membership'
+    scrape_interval: 5s
+    scrape_timeout: 3s
+    metrics_path: /actuator/prometheus
+    scheme: http
+    static_configs:
+      - targets: ['membershipms:8083']
