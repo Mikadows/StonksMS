@@ -1,0 +1,9 @@
+{
+  "service": {
+    "name": "membership",
+    "tags": [
+      "microservices"
+    ],
+    "port": 8083
+  }
+}
