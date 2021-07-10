@@ -2,6 +2,12 @@
 
 WIP : Trading microservices platform - School
 
+## Run it
+To start the docker-compose and play with services you **MUST** execute this command at root folder to compile each services.
+```shell
+mvn clean package
+```
+
 ## Services
 ### Stonks API
 

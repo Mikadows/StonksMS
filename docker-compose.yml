@@ -1,10 +1,30 @@
 version: "3.8"
 
 services:
-  stonksms:
-    build: .
+  educationms:
+    build: education
     ports:
       - 8081:8081
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/stonks
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      KAFKA_URL: kafka:9092
+
+  marketplacems:
+    build: marketplace
+    ports:
+      - 8082:8082
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/stonks
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      KAFKA_URL: kafka:9092
+
+  membershipms:
+    build: membership
+    ports:
+      - 8083:8083
     environment:
       DB_URL: jdbc:postgresql://postgres:5432/stonks
       DB_USERNAME: admin
@@ -32,7 +52,9 @@ services:
     ports:
       - 9090:9090
     depends_on:
-      - stonksms
+      - educationms
+      - marketplacems
+      - membershipms
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.12.1
