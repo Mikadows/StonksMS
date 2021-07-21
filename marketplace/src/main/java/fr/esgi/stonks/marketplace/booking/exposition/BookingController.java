@@ -26,7 +26,7 @@ public class BookingController {
                 .from(request.getFrom())
                 .to(request.getTo())
                 .build();
-       // this.bookingMessageProducer.sendMessage(booking.toString());
+        this.bookingMessageProducer.sendMessage(booking.toString());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

@@ -3,8 +3,6 @@ package fr.esgi.stonks.marketplace.booking.domain;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 public class Booking {
