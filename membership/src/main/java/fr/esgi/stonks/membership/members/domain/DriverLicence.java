@@ -1,6 +1,5 @@
-package fr.esgi.stonks.membership.apply.domain;
+package fr.esgi.stonks.membership.members.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 

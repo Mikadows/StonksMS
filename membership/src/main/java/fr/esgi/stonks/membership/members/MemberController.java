@@ -1,13 +1,17 @@
 package fr.esgi.stonks.membership.members;
 
-import fr.esgi.stonks.membership.apply.domain.PaymentCard;
-import fr.esgi.stonks.membership.apply.domain.User;
+import fr.esgi.stonks.membership.members.domain.User;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class MemberController {
 
-    public void addMember(User user) {
+    public String addMember(User user) {
         //TODO insertBDD
+        return "1";
+    }
+
+    public String findUserAvailable(String qualification, String from, String to) {
+        return "1";
     }
 }

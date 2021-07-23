@@ -1,8 +1,6 @@
 package fr.esgi.stonks.membership.regulationEngine;
 
-import fr.esgi.stonks.membership.apply.domain.DriverLicence;
-import fr.esgi.stonks.membership.apply.domain.PaymentCard;
-import fr.esgi.stonks.membership.apply.domain.User;
+import fr.esgi.stonks.membership.members.domain.User;
 
 import java.util.Date;
 

@@ -2,9 +2,9 @@ package fr.esgi.stonks.membership.apply.exposition;
 
 import fr.esgi.stonks.membership.members.MemberController;
 import fr.esgi.stonks.membership.payments.PaymentController;
-import fr.esgi.stonks.membership.apply.domain.DriverLicence;
-import fr.esgi.stonks.membership.apply.domain.PaymentCard;
-import fr.esgi.stonks.membership.apply.domain.User;
+import fr.esgi.stonks.membership.members.domain.DriverLicence;
+import fr.esgi.stonks.membership.members.domain.PaymentCard;
+import fr.esgi.stonks.membership.members.domain.User;
 import fr.esgi.stonks.membership.apply.exposition.resquests.ApplyRequest;
 import fr.esgi.stonks.membership.regulationEngine.MembershipRegulation;
 import lombok.AllArgsConstructor;
@@ -27,19 +27,9 @@ public class ApplyController {
     public ResponseEntity<?> applyMember(@RequestBody ApplyRequest request){
         User user = null;
         try {
-            DriverLicence driverLicence = DriverLicence.builder()
-                    .date(request.getDriverLicenceDate())
-                    .validityDate(request.getPaymentCardValidityDate())
-                    .name(request.getDriverLicenceName())
-                    .build();
 
-            PaymentCard paymentCard = PaymentCard.builder()
-                    .name(request.getPaymentCardName())
-                    .number(request.getPaymentCardNumber())
-                    .cryptogram(request.getPaymentCardCryptogram())
-                    .validityDate(request.getPaymentCardValidityDate())
-                    .build();
-
+            DriverLicence driverLicence = this.buildDriverLicence(request);
+            PaymentCard paymentCard = this.buildPaymentCard(request);
             user = User.builder()
                     .paymentCard(paymentCard)
                     .driverLicence(driverLicence)
@@ -52,11 +42,29 @@ public class ApplyController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
         }
         if(MembershipRegulation.verifyApplication(user)){
+            String userId = memberController.addMember(user);
+            paymentController.savePayment(userId, user);
             paymentController.processPayment(user.getPaymentCard());
-            memberController.addMember(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    private PaymentCard buildPaymentCard(ApplyRequest request) {
+        return PaymentCard.builder()
+                .name(request.getPaymentCardName())
+                .number(request.getPaymentCardNumber())
+                .cryptogram(request.getPaymentCardCryptogram())
+                .validityDate(request.getPaymentCardValidityDate())
+                .build();
+    }
+
+    private DriverLicence buildDriverLicence(ApplyRequest request) {
+        return DriverLicence.builder()
+                .date(request.getDriverLicenceDate())
+                .validityDate(request.getPaymentCardValidityDate())
+                .name(request.getDriverLicenceName())
+                .build();
     }
 
 }
