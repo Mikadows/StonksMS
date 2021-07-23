@@ -8,6 +8,7 @@ import lombok.Data;
 public class ApplyRequest {
     private String name;
     private String email;
+    private String password;
     private String birthdate;
     private String qualifications;
     private String driverLicenceName;
