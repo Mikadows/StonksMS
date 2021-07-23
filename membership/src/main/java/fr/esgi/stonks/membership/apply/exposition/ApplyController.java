@@ -7,6 +7,7 @@ import fr.esgi.stonks.membership.members.domain.PaymentCard;
 import fr.esgi.stonks.membership.members.domain.User;
 import fr.esgi.stonks.membership.apply.exposition.resquests.ApplyRequest;
 import fr.esgi.stonks.membership.regulationEngine.MembershipRegulation;
+import fr.esgi.stonks.membership.workflow.WorkflowController;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ public class ApplyController {
 
     private final PaymentController paymentController;
     private final MemberController memberController;
+    private final WorkflowController workflowController;
 
     @PostMapping()
     public ResponseEntity<?> applyMember(@RequestBody ApplyRequest request){
@@ -43,8 +45,9 @@ public class ApplyController {
         }
         if(MembershipRegulation.verifyApplication(user)){
             String userId = memberController.addMember(user);
-            paymentController.savePayment(userId, user);
-            paymentController.processPayment(user.getPaymentCard());
+            this.paymentController.savePayment(userId, user);
+            this.paymentController.processPayment(user.getPaymentCard());
+            this.workflowController.sendMessageUserAvailable(userId, user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
