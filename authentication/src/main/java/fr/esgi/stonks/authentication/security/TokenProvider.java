@@ -1,6 +1,7 @@
 package fr.esgi.stonks.authentication.security;
 
 import fr.esgi.stonks.authentication.model.Account;
+import fr.esgi.stonks.authentication.model.Role;
 import fr.esgi.stonks.authentication.service.AccountService;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class TokenProvider {
 
     public String createToken(Account account) {
         Claims claims = Jwts.claims().setSubject(account.getEmail());
-        claims.put("auth", account.getRoles());
+        claims.put("auth", Role.ROLE_CLIENT);
 
         Date validity = new Date((new Date()).getTime() + this.tokenValidityInMilliseconds);
 
