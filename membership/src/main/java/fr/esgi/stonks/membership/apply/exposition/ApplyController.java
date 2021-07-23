@@ -1,6 +1,7 @@
 package fr.esgi.stonks.membership.apply.exposition;
 
-import fr.esgi.stonks.membership.Payments.PaymentController;
+import fr.esgi.stonks.membership.members.MemberController;
+import fr.esgi.stonks.membership.payments.PaymentController;
 import fr.esgi.stonks.membership.apply.domain.DriverLicence;
 import fr.esgi.stonks.membership.apply.domain.PaymentCard;
 import fr.esgi.stonks.membership.apply.domain.User;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApplyController {
 
     private final PaymentController paymentController;
+    private final MemberController memberController;
 
     @PostMapping()
     public ResponseEntity<?> applyMember(@RequestBody ApplyRequest request){
@@ -51,7 +53,7 @@ public class ApplyController {
         }
         if(MembershipRegulation.verifyApplication(user)){
             paymentController.processPayment(user.getPaymentCard());
-            //TODO insert BDD
+            memberController.addMember(user);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }
         else return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);

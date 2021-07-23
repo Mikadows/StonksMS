@@ -1,4 +1,4 @@
-package fr.esgi.stonks.membership.Payments;
+package fr.esgi.stonks.membership.payments;
 
 import fr.esgi.stonks.membership.apply.domain.PaymentCard;
 import lombok.AllArgsConstructor;
