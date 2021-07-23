@@ -31,6 +31,16 @@ services:
       DB_PASSWORD: admin
       KAFKA_URL: kafka:9092
 
+  auth:
+    build: authentication
+    ports:
+      - 8084:8084
+    environment:
+      DB_URL: jdbc:postgresql://postgres:5432/stonks
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+      KAFKA_URL: kafka:9092
+
   grafana:
     image: grafana/grafana
     restart: 'always'
