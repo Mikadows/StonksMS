@@ -7,7 +7,8 @@ import java.util.Date;
 public class MembershipRegulation {
 
     public static Boolean verifyApplication(User user){
-        return verifyDriverLicence(user) && verifyPaymentCard(user);
+        return true;
+//        return verifyDriverLicence(user) && verifyPaymentCard(user);
     }
 
     public static Boolean verifyDriverLicence(User user){
@@ -26,10 +27,12 @@ public class MembershipRegulation {
     }
 
     private static boolean verifyGivenDate(String date) {
-        return new Date().getTime() > new Date(date).getTime();
+        return true;
+//        return new Date().getTime() > new Date(date).getTime();
     }
 
     private static Boolean verifyValidityDate(String validityDate) {
-        return new Date(validityDate).getTime() > new Date().getTime();
+        return true;
+//        return new Date(validityDate).getTime() > new Date().getTime();
     }
 }

@@ -1,10 +1,11 @@
 package fr.esgi.stonks.membership.workflow;
 
-import fr.esgi.stonks.membership.members.MemberController;
 import fr.esgi.stonks.membership.members.domain.User;
 import fr.esgi.stonks.membership.workflow.booking.infra.NewMemberMessageProducer;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @AllArgsConstructor
 public class WorkflowController {
 

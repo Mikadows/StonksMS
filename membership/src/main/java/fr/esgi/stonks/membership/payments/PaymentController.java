@@ -3,7 +3,9 @@ package fr.esgi.stonks.membership.payments;
 import fr.esgi.stonks.membership.members.domain.PaymentCard;
 import fr.esgi.stonks.membership.members.domain.User;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
 @AllArgsConstructor
 public class PaymentController {
 
