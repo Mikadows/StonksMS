@@ -1,4 +1,4 @@
-package fr.esgi.stonks.stonksms.stock.infra;
+package fr.esgi.stonks.membership.workflow.booking.infra;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 
 @Service
-public class MessageConsumer {
-    private final Logger logger = LoggerFactory.getLogger(MessageConsumer.class);
+public class BookingMessageConsumer {
+    private final Logger logger = LoggerFactory.getLogger(BookingMessageConsumer.class);
 
-    @KafkaListener(topics = "stocks", groupId = "group_id")
+    @KafkaListener(topics = "bookingTopic", groupId = "group_id")
     public void consume(String message) throws IOException {
         logger.info(String.format("#### -> Consumed message -> %s", message));
     }
