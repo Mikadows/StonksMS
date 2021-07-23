@@ -1,4 +1,4 @@
-package fr.esgi.stonks.membership.booking.infra;
+package fr.esgi.stonks.membership.workflow.booking.infra;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
